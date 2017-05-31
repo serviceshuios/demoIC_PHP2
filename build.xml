@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project name="jenkins_tp" basedir="." default="principal">
+	<target name="principal">
+		<phingcall target="main"/>
+		<!--<phingcall target="phpunit"/>-->
+		<phingcall target="phpcs"/>
+		<phingcall target="phpcpd"/>
+		<phingcall target="phpdepend"/>
+	</target>
+	<target name="main">
+		<mkdir dir="${project.basedir}/reports" />
+	</target>
+	<target name="phpunit">
+		<mkdir dir="${project.basedir}/reports/phpunit" />
+		<phpunit>
+			<formatter todir="${project.basedir}/reports/phpunit" type="xml"/>
+			<batchtest>
+				<fileset dir="${project.basedir}/tests">
+				  <include name="**/*Test*.php"/>
+				</fileset>
+			</batchtest>
+		</phpunit>
+	</target>
+	<target name="phpcs">
+		<mkdir dir="${project.basedir}/reports/phpcs" />
+		<phpcodesniffer standard="Zend" format="summary">
+			<fileset dir="${project.basedir}/www">
+			  <include name="**/*.php"/>
+			</fileset>
+		<formatter type="checkstyle" outfile="${project.basedir}/reports/phpcs/checkstyle.xml"/>
+		</phpcodesniffer>
+	</target>
+	<target name="phpcpd">
+		<mkdir dir="${project.basedir}/reports/phpcpd" />
+		<phpcpd>
+			<fileset dir="${project.basedir}/www">
+			  <include name="**/*.php"/>
+			</fileset>
+		<formatter type="pmd" outfile="${project.basedir}/reports/phpcpd/pmd-cpd.xml"/>
+		</phpcpd>
+	</target>	
+	<target name="phpdepend">
+		<mkdir dir="${project.basedir}/reports/phpdepend" />
+		<phpdepend>
+			<fileset dir="${project.basedir}/www">
+			  <include name="**/*.php"/>
+			</fileset>
+		<logger type="jdepend-xml" outfile="${project.basedir}/reports/phpdepend/jdepend.xml"/>
+		<analyzer type="coderank-mode" value="method"/>
+		</phpdepend>
+	</target>
+</project>
