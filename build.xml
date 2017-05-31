@@ -49,7 +49,7 @@
 	<target name="phpdox">
 		<exec command="phpdox" dir="${project.basedir}/www"/>
 	</target>
-	</phpdox>
+	</target>
 	<target name="phpdepend">
 		<mkdir dir="${project.basedir}/reports/phpdepend" />
 		<phpdepend>
