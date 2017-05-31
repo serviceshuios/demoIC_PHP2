@@ -2,10 +2,11 @@
 <project name="jenkins_tp" basedir="." default="principal">
 	<target name="principal">
 		<phingcall target="main"/>
-		<!--<phingcall target="phpunit"/>-->
+		<phingcall target="phpunit"/>
 		<phingcall target="phpcs"/>
 		<phingcall target="phpcpd"/>
 		<phingcall target="phpdepend"/>
+		<phingcall target="phpmd"/>
 	</target>
 	<target name="main">
 		<mkdir dir="${project.basedir}/reports" />
@@ -16,7 +17,7 @@
 			<formatter todir="${project.basedir}/reports/phpunit" type="xml"/>
 			<batchtest>
 				<fileset dir="${project.basedir}/tests">
-				  <include name="**/*Test*.php"/>
+				  <include name="*.php"/>
 				</fileset>
 			</batchtest>
 		</phpunit>
@@ -38,7 +39,12 @@
 			</fileset>
 		<formatter type="pmd" outfile="${project.basedir}/reports/phpcpd/pmd-cpd.xml"/>
 		</phpcpd>
-	</target>	
+	</target>
+	<target name="phpmd">
+		<phpmd file="${project.basedir}/www">
+			<formatter type="xml" outfile="${project.basedir}/reports/phpmd.xml" />
+		</phpmd>
+	</target>
 	<target name="phpdepend">
 		<mkdir dir="${project.basedir}/reports/phpdepend" />
 		<phpdepend>
