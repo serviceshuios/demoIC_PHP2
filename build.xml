@@ -7,6 +7,7 @@
 		<phingcall target="phpcpd"/>
 		<phingcall target="phpdepend"/>
 		<phingcall target="phpmd"/>
+		<phingcall target="phpdox"/>
 	</target>
 	<target name="main">
 		<mkdir dir="${project.basedir}/reports" />
@@ -45,6 +46,10 @@
 			<formatter type="xml" outfile="${project.basedir}/reports/phpmd.xml" />
 		</phpmd>
 	</target>
+	<target name="phpdox">
+		<exec command="phpdox" dir="${project.basedir}/www"/>
+	</target>
+	</phpdox>
 	<target name="phpdepend">
 		<mkdir dir="${project.basedir}/reports/phpdepend" />
 		<phpdepend>
