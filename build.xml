@@ -61,4 +61,14 @@
 		<analyzer type="coderank-mode" value="method"/>
 		</phpdepend>
 	</target>
+	 <taskdef name="sonar" classname="phing.tasks.ext.sonar.SonarTask" />
+
+    <sonar executable="sonarqube-scanner">
+        <property name="sonar.projectKey"     value="my-unique-project-key" />
+        <property name="sonar.projectName"    value="Foo Project" />
+        <property name="sonar.projectVersion" value="0.1.0" />
+        <property name="sonar.sources"        value="www" />
+    </sonar>
+
+
 </project>
