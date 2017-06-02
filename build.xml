@@ -63,7 +63,7 @@
 	</target>
 <taskdef name="sonar" classname="phing.tasks.ext.sonar.SonarTask" />
 
-    <sonar executable="sonar-scanner.bat">
+    <sonar executable="C:\Users\zameddy\Downloads\sonar-scanner\bin\sonar-scanner.bat">
         <property name="sonar.projectKey"     value="my-unique-project-key" />
         <property name="sonar.projectName"    value="Foo Project" />
         <property name="sonar.projectVersion" value="0.1.0" />
